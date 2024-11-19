@@ -8,12 +8,12 @@ import { IUser } from '../../types/user.type';
 })
 export class AdminService {
 
-  apiUrl = 'http://localhost:3000/usuarios/'
+  apiUrl = 'http://localhost:8080/api/usuarios/alterar'
 
   constructor(private _http : HttpClient) { }
 
   disableOrEnableUser(usuario: IUser, userId: number): Observable<IUser> {
-    return this._http.put<IUser>(`${this.apiUrl}` + `${userId}`, usuario);
+    return this._http.put<IUser>(`${this.apiUrl}` + `/${userId}`, usuario);
   }
 
 }

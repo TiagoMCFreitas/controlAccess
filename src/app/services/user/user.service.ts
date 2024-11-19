@@ -18,6 +18,7 @@ export class UserService {
   }
   getUserByToken():  Observable<IUser>{
     const headers : HttpHeaders = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    console.log(headers)
     return this._http.get<IUser>(this.apiUrl + "profile", {headers, withCredentials: true });
 
   }

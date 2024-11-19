@@ -34,7 +34,7 @@ export class AuthService {
         if (response) {
           this._tokenService.setItem("token", response.token);
           this._userStateService.setToken(response.token);
-          this.setAuthState(response.token);
+          this.setAuthState(response.usuario);
           return this.router.navigate(['/profile']);
         }
        else{
