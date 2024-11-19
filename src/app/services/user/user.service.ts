@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IUser } from '../../types/user.type';
@@ -17,15 +17,16 @@ export class UserService {
     this.token = token;
   }
   getUserByToken():  Observable<IUser>{
+    const headers : HttpHeaders = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this._http.get<IUser>(this.apiUrl + "profile", {headers, withCredentials: true });
 
-    return this._http.get<IUser>(this.apiUrl + "profile");
   }
   getToken(): string | null {
     return this.token;
   }
 
   getUsers(): Observable<IUser[]>{
-    return this._http.get<IUser[]>(this.apiUrl);
+    return this._http.get<IUser[]>(this.apiUrl  + "lista");
   }
 
   storeUser(usuario: IUser): Observable<IUser>{
