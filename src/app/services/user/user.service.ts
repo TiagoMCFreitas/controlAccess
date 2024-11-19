@@ -7,18 +7,21 @@ import { IUser } from '../../types/user.type';
   providedIn: 'root'
 })
 export class UserService {
-  private userId: string | null = null;
-  apiUrl = 'http://localhost:3000/usuarios'
+  private token: string | null = null;
+  apiUrl = 'http://localhost:8080/api/usuario/'
 
   constructor(private _http : HttpClient) { }
 
 
-  setUserId(id: string): void {
-    this.userId = id;
+  setToken(token: string): void {
+    this.token = token;
   }
+  getUserByToken():  Observable<IUser>{
 
-  getUserId(): string | null {
-    return this.userId;
+    return this._http.get<IUser>(this.apiUrl + "profile");
+  }
+  getToken(): string | null {
+    return this.token;
   }
 
   getUsers(): Observable<IUser[]>{
